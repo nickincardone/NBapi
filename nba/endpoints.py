@@ -1,6 +1,8 @@
 import requests
-schedule_endpoint = 'http://stats.nba.com/stats/scoreboardv2'
-boxscore_endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
+nba_api = 'http://stats.nba.com/stats/'
+schedule_endpoint = nba_api+'scoreboardv2'
+boxscore_endpoint = nba_api+'boxscoretraditionalv2'
+team_schedule_endpoint = nba_api+'teamgamelog'
 
 #known enpoints
 '''
@@ -29,6 +31,16 @@ def get_schedule(date):
     r = requests.get(schedule_endpoint, params=payload)
     return r.json()
 
+def get_team_schedule(team_id, season):
+    # season format ex. 2014-15
+    payload = {
+        "TeamID":team_id,
+        "LeagueID":"00",
+        "Season":season,
+        "SeasonType":"Regular Season"
+    }
+    r = requests.get(team_schedule_endpoint, params=payload)
+    return r.json()
 
 def get_boxscore(game_id):
     payload = {
