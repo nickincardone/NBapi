@@ -1,2 +1,2 @@
 # NBapi
-python wrapper to access nba api
+Work in progress
