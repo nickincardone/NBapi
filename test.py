@@ -17,6 +17,13 @@ class TestSeasonCleanse(unittest.TestCase):
         self.assertEqual('2011-12', clease_season(11))
         self.assertEqual('2011-12', clease_season(2011))
         # TODO: test bad dates
+    def test_str(self):
+        self.assertEqual('2000-01', clease_season('2000-2001'))
+        self.assertEqual('2014-15', clease_season('2014-15'))
+        self.assertEqual('2014-15', clease_season('2014'))
+        self.assertEqual('2014-15', clease_season('14'))
+        self.assertEqual('2000-01', clease_season('0'))
+
 
 
 if __name__ == '__main__':
