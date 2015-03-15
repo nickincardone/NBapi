@@ -28,9 +28,14 @@ def clease_season(season):
             next_year = (num%100)+1
             return '%s-%s' % (num, next_year)
 
+        # input has number but doesn't correspond to a valid year
+        raise ValueError('Input does not have corresponding year')
+
     first_year = 1940
-    #TODO take in to account current month
-    cur_year = datetime.date.today().year + 1
+    if datetime.date.today().month >= 7:
+        cur_year = datetime.date.today().year + 1
+    else:
+        cur_year = datetime.date.today().year
 
     if type(season) is str:
         if '-' not in season:
@@ -38,17 +43,18 @@ def clease_season(season):
                 season_int = int(season)
                 return int_to_season(season_int)
             except:
-                return 'error'
+                raise ValueError('Invalid input, example input: 1999, 1999-00, 1999-2000, 99')
         else:
             try:
                 season_int = int(season.split('-')[0])
                 return int_to_season(season_int)
             except:
-                return 'error'
+                raise ValueError('Invalid input, example input: 1999, 1999-00, 99')
 
     if type(season) is int:
         return int_to_season(season)
         
+    raise ValueError('Invalid input, example input: 1999, 1999-00, 99')
 
     # TODO throw custom error
     return 'error'
