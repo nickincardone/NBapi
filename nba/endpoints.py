@@ -32,7 +32,7 @@ def get_team_schedule(team_id, season):
     payload = {
         "TeamID":team_id,
         "LeagueID":"00",
-        "Season":utils.clease_season(season),
+        "Season":utils.cleanse_season(season),
         "SeasonType":"Regular Season"
     }
     response = utils.get_response(endpoint, payload)
@@ -69,7 +69,7 @@ def get_player_games(player_id, season):
     payload = {
         "PlayerID":player_id,
         "LeagueID":"00",
-        "Season":utils.clease_season(season),
+        "Season":utils.cleanse_season(season),
         "SeasonType":"Regular Season"
     }
     response = utils.get_response(endpoint, payload)
@@ -80,7 +80,7 @@ def get_team_info(team_id, season):
     endpoint = 'http://stats.nba.com/stats/teaminfocommon'
     payload = {
         "LeagueID":"00",
-        "Season":utils.clease_season(season),
+        "Season":utils.cleanse_season(season),
         "SeasonType":"Regular Season",
         "TeamID":team_id
     }
@@ -158,7 +158,7 @@ def get_all_players(season, all_time=False):
     endpoint = 'http://stats.nba.com/stats/commonallplayers'
     payload = {
         "LeagueID":"00",
-        "Season":utils.clease_season(season),
+        "Season":utils.cleanse_season(season),
         "IsOnlyCurrentSeason":cur_season
     }
     response = utils.get_response(endpoint, payload)

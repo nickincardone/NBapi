@@ -1,7 +1,11 @@
 import datetime
 import requests
 
-def clease_season(season):
+def cleanse_date(date):
+    #TODO
+    pass
+
+def cleanse_season(season):
     def int_to_season(num):
         if num == 99:
             return '1999-00'
