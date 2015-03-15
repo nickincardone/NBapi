@@ -1,4 +1,5 @@
 import datetime
+import requests
 
 def clease_season(season):
     def int_to_season(num):
@@ -56,6 +57,23 @@ def clease_season(season):
         
     raise ValueError('Invalid input, example input: 1999, 1999-00, 99')
 
-    # TODO throw custom error
-    return 'error'
+def set_to_dict(result_set):
+    result = []
+    for row in result_set['rowSet']:
+        cur_row = {}
+        for i, item in enumerate(row):
+            header = result_set['headers'][i]
+            cur_row[header] = item
+        result.append(cur_row)
+    return result
 
+def get_response(endpoint, payload):
+    r = requests.get(endpoint, params=payload)
+    response = r.json()
+    result = {}
+    result['params'] = response['parameters']
+    result['resource'] = response['resource']
+    for result_set in response['resultSets']:
+        set_name = result_set['name']
+        result[set_name] = set_to_dict(result_set)
+    return result
