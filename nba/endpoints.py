@@ -1,15 +1,17 @@
-import requests
+import utils
+
+# TODO break these out in a more oo way
 nba_api = 'http://stats.nba.com/stats/'
-schedule_endpoint = nba_api+'scoreboardv2'
-boxscore_endpoint = nba_api+'boxscoretraditionalv2'
-team_schedule_endpoint = nba_api+'teamgamelog'
+schedule = nba_api+'scoreboardv2' 
+boxscore = nba_api+'boxscoretraditionalv2'
+team_schedule = nba_api+'teamgamelog'
 player_info = nba_api+'commonplayerinfo'
 player_game_log = nba_api+'playergamelog'
 team_info = nba_api+'teaminfocommon'
 all_players = nba_api+'commonallplayers'
-team_roster = nba_api+'commonteamroster'
+team_rosteresponse = nba_api+'commonteamroster'
 player_shot_log = nba_api+'playerdashptshotlog'
-player_rebound_log = nba_api='playerdashptreboundlogs'
+player_rebound_log = nba_api+'playerdashptreboundlogs'
 
 #known enpoints
 '''
@@ -31,24 +33,36 @@ http://stats.nba.com/feeds/RotoWirePlayers-583598/team_id.json
 
 def get_schedule(date):
     # date format: string mm/dd/yyyy
+    schedule = []
     payload = {
         'DayOffset': '0',
         'LeagueID': '00',
         'gameDate': date
     }
-    r = requests.get(schedule_endpoint, params=payload)
-    return r.json()
+    response = utils.get_response(schedule, payload)
+    games = response['GameHeader']
+    for game in games:
+        cur_game = {
+            'id':game['GAME_ID'],
+            'home_team':game['HOME_TEAM_ID'],
+            'away_team':game['VISITOR_TEAM_ID'],
+            'season':game['SEASON'],
+            'status':game['GAME_STATUS_TEXT'],
+            'date':game['GAME_DATE_EST']
+        }
+        schedule.append(cur_game)
+    return schedule
 
 def get_team_schedule(team_id, season):
     # season format ex. 2014-15
     payload = {
         "TeamID":team_id,
         "LeagueID":"00",
-        "Season":season,
+        "Season":utils.clease_season(season),
         "SeasonType":"Regular Season"
     }
-    r = requests.get(team_schedule_endpoint, params=payload)
-    return r.json()
+    response = utils.get_response(team_schedule, payload)
+    return response
 
 def get_boxscore(game_id):
     payload = {
@@ -59,8 +73,8 @@ def get_boxscore(game_id):
         'EndRange': 28800,
         'RangeType': 2
     }
-    r = requests.get(boxscore_endpoint, params=payload)
-    return r.json()
+    response = utils.get_response(boxscore, payload)
+    return response
 
 def get_player_info(player_id):
     # example james harden = 201935
@@ -68,28 +82,37 @@ def get_player_info(player_id):
         "PlayerID":player_id,
         "LeagueID":"00"
     }
-    r = requests.get(player_info, params=payload)
-    return r.json()
+    response = utils.get_response(player_info, payload)
+    return response
 
 def get_player_games(player_id, season):
     payload = {
         "PlayerID":player_id,
         "LeagueID":"00",
-        "Season":season,
+        "Season":utils.clease_season(season),
         "SeasonType":"Regular Season"
     }
-    r = requests.get(player_game_log, params=payload)
-    return r.json()
+    response = utils.get_response(player_game_log, payload)
+    return response
 
 def get_team_info(team_id, season):
-    payload = {"LeagueID":"00","Season":season,"SeasonType":"Regular Season","TeamID":team_id}
-    r = requests.get(team_info, params=payload)
-    return r.json()
+    payload = {
+        "LeagueID":"00",
+        "Season":utils.clease_season(season),
+        "SeasonType":"Regular Season",
+        "TeamID":team_id
+    }
+    response = utils.get_response(team_info, payload)
+    return response
 
 def get_team_roster(team_id, season):
-    payload = {"TeamID":team_id,"LeagueID":"00","Season":season}
-    r = requests.get(team_roster, params=payload)
-    return r.json()
+    payload = {
+        "TeamID":team_id,
+        "LeagueID":"00",
+        "Season":utils.clease_season(season)
+    }
+    response = utils.get_response(team_roster, payload)
+    return response
 
 def get_player_shot_log(player_id):
     payload = {
@@ -111,8 +134,8 @@ def get_player_shot_log(player_id):
         "Period":0,
         "LastNGames":0
     }
-    r = requests.get(player_shot_log, params=payload)
-    return r.json()
+    response = utils.get_response(player_shot_log, payload)
+    return response
 
 def get_player_rebound_log(player_id):
     payload = {
@@ -134,8 +157,8 @@ def get_player_rebound_log(player_id):
         "Period":0,
         "LastNGames":0
     }
-    r = requests.get(player_rebound_log, params=payload)
-    return r.json()
+    response = utils.get_response(player_rebound_log, payload)
+    return response
 
 def get_all_players(season, all_time=False):
     # 0 is false 1 is true
@@ -143,6 +166,10 @@ def get_all_players(season, all_time=False):
     if all_time:
         cur_season = 0
 
-    payload = {"LeagueID":"00","Season":season,"IsOnlyCurrentSeason":cur_season}
-    r = requests.get(all_players, params=payload)
-    return r.json()
+    payload = {
+        "LeagueID":"00",
+        "Season":utils.clease_season(season),
+        "IsOnlyCurrentSeason":cur_season
+    }
+    response = utils.get_response(all_players, payload)
+    return response
