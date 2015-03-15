@@ -2,7 +2,7 @@ import utils
 
 # TODO break these out in a more oo way
 nba_api = 'http://stats.nba.com/stats/'
-schedule = nba_api+'scoreboardv2' 
+schedule_endpoint = nba_api+'scoreboardv2' 
 boxscore = nba_api+'boxscoretraditionalv2'
 team_schedule = nba_api+'teamgamelog'
 player_info = nba_api+'commonplayerinfo'
@@ -31,7 +31,7 @@ http://stats.nba.com/stats/boxscorefourfactors
 http://stats.nba.com/feeds/RotoWirePlayers-583598/team_id.json
 '''
 
-def get_schedule(date):
+def get_schedule(date, pretty=True):
     # date format: string mm/dd/yyyy
     schedule = []
     payload = {
@@ -39,7 +39,9 @@ def get_schedule(date):
         'LeagueID': '00',
         'gameDate': date
     }
-    response = utils.get_response(schedule, payload)
+    response = utils.get_response(schedule_endpoint, payload)
+    if not pretty:
+        return response
     games = response['GameHeader']
     for game in games:
         cur_game = {
