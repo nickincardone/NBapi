@@ -1,7 +1,21 @@
 import utils
 
-def get_schedule(date, pretty=True):
-    # date format: string mm/dd/yyyy
+def get_schedule_from_date(date):
+    """
+    return games that happen on given date
+    args:
+        date (string): format=(mm/dd/yy)
+    returns:
+        games (list): games that happen that day
+
+        each game is a dict with the following available keys
+        ["GAME_DATE_EST","GAME_SEQUENCE","GAME_ID","GAME_STATUS_ID",
+        "GAME_STATUS_TEXT","GAMECODE","HOME_TEAM_ID","VISITOR_TEAM_ID",
+        "SEASON","LIVE_PERIOD","LIVE_PC_TIME",
+        "NATL_TV_BROADCASTER_ABBREVIATION","LIVE_PERIOD_TIME_BCAST",
+        "WH_STATUS"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/scoreboardv2' 
     payload = {
         'DayOffset': '0',
@@ -11,7 +25,8 @@ def get_schedule(date, pretty=True):
     response = utils.get_response(endpoint, payload)
     return response['GameHeader']
 
-def get_team_schedule(team_id, season, pretty=True):
+def get_team_schedule(team_id, season):
+    # TODO: document
     # season format ex. 2014-15
     endpoint = 'http://stats.nba.com/stats/teamgamelog'
     payload = {
@@ -24,6 +39,7 @@ def get_team_schedule(team_id, season, pretty=True):
     return response['TeamGameLog']
 
 def get_boxscore(game_id):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
     payload = {
         'GameID': game_id,
@@ -37,6 +53,7 @@ def get_boxscore(game_id):
     return response['PlayerStats']
 
 def get_player_info(player_id):
+    # TODO: document
     # example james harden = 201935
     endpoint = 'http://stats.nba.com/stats/commonplayerinfo'
     payload = {
@@ -47,6 +64,7 @@ def get_player_info(player_id):
     return response
 
 def get_player_games(player_id, season):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/playergamelog'
     payload = {
         "PlayerID":player_id,
@@ -58,6 +76,7 @@ def get_player_games(player_id, season):
     return response
 
 def get_team_info(team_id, season):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/teaminfocommon'
     payload = {
         "LeagueID":"00",
@@ -69,16 +88,18 @@ def get_team_info(team_id, season):
     return response
 
 def get_team_roster(team_id, season):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/commonteamroster'
     payload = {
         "TeamID":team_id,
         "LeagueID":"00",
-        "Season":utils.clease_season(season)
+        "Season":utils.cleanse_season(season)
     }
     response = utils.get_response(endpoint, payload)
     return response
 
 def get_player_shot_log(player_id):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/playerdashptshotlog'
     payload = {
         "LeagueID":"00",
@@ -103,6 +124,7 @@ def get_player_shot_log(player_id):
     return response
 
 def get_player_rebound_log(player_id):
+    # TODO: document
     endpoint = 'http://stats.nba.com/stats/playerdashptreboundlogs'
     payload = {
         "LeagueID":"00",
@@ -127,6 +149,7 @@ def get_player_rebound_log(player_id):
     return response
 
 def get_all_players(season, all_time=False):
+    # TODO: document
     # 0 is false 1 is true
     cur_season = 1
     if all_time:
