@@ -66,7 +66,8 @@ def set_to_dict(result_set):
     for row in result_set['rowSet']:
         cur_row = {}
         for i, item in enumerate(row):
-            header = result_set['headers'][i]
+            #uppercase all headers to prevent discrepencacy i.e. Game_ID vs GAME_ID
+            header = result_set['headers'][i].upper()
             cur_row[header] = item
         result.append(cur_row)
     return result

@@ -10,7 +10,7 @@ def get_schedule_from_date(date):
     """
     return games that happen on given date
     args:
-        date (string): format=(mm/dd/yy)
+        date (string): format=mm/dd/yyyy
     returns:
         games (list): games that happen that day
 
@@ -42,14 +42,12 @@ def get_team_game_log(team_id, season):
         games (list): games a team has played in given season
 
         each game is a dict with the following available keys
-        ["Team_ID","Game_ID","GAME_DATE","MATCHUP","WL","MIN",
+        ["TEAM_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
         "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM",
         "FTA","FT_PCT","OREB","DREB","REB","AST","STL","BLK",
         "TOV","PF","PTS"]
 
     """
-    # TODO: document
-    # season format ex. 2014-15
     endpoint = 'http://stats.nba.com/stats/teamgamelog'
     payload = {
         "TeamID": team_id,
@@ -91,7 +89,7 @@ def get_boxscore(game_id):
 
 def get_player_info(player_id):
     """
-    return a players personal information
+    return a players information
     args:
         player_id (int)
     returns:
