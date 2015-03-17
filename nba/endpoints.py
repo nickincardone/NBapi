@@ -114,7 +114,21 @@ def get_player_info(player_id):
 
 
 def get_player_games(player_id, season):
-    # TODO: document
+    """
+    return games that a player has already played in given season
+    args:
+        player_id (int)
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        games (list): games a player has played in given season
+
+        each game is a dict with the following available keys
+        ["SEASON_ID","PLAYER_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
+        "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT",
+        "OREB","DREB","REB","AST","STL","BLK","TOV","PF","PTS","PLUS_MINUS",
+        "VIDEO_AVAILABLE"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/playergamelog'
     payload = {
         "PlayerID": player_id,
@@ -123,11 +137,24 @@ def get_player_games(player_id, season):
         "SeasonType": "Regular Season"
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['PlayerGameLog']
 
 
 def get_team_info(team_id, season):
-    # TODO: document
+    """
+    return a team's information
+    args:
+        team_id (int)
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        info (dict)
+
+        info is a dict with the following available keys
+        ["TEAM_ID","SEASON_YEAR","TEAM_CITY","TEAM_NAME","TEAM_ABBREVIATION",
+        "TEAM_CONFERENCE","TEAM_DIVISION","TEAM_CODE","W","L","PCT",
+        "CONF_RANK","DIV_RANK","MIN_YEAR","MAX_YEAR"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/teaminfocommon'
     payload = {
         "LeagueID": "00",
@@ -136,11 +163,23 @@ def get_team_info(team_id, season):
         "TeamID": team_id
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['TeamInfoCommon']
 
 
 def get_team_roster(team_id, season):
-    # TODO: document
+    """
+    return players on a team (only current players if this season)
+    args:
+        team_id (int)
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        players (list): players on roster
+
+        each player is a dict with the following available keys
+        ["TeamID","SEASON","LeagueID","PLAYER","NUM","POSITION","HEIGHT",
+        "WEIGHT","BIRTH_DATE","AGE","EXP","SCHOOL","PLAYER_ID"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/commonteamroster'
     payload = {
         "TeamID": team_id,
@@ -148,7 +187,7 @@ def get_team_roster(team_id, season):
         "Season": utils.cleanse_season(season)
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['CommonTeamRoster']
 
 
 def get_player_shot_log(player_id):
@@ -204,8 +243,20 @@ def get_player_rebound_log(player_id):
 
 
 def get_all_players(season, all_time=False):
-    # TODO: document
-    # 0 is false 1 is true
+    """
+    return boxscore for a given game
+    args:
+        game_id (int)
+    returns:
+        players (list)
+
+        each player is a dict with the following available keys
+        ["PERSON_ID","DISPLAY_LAST_COMMA_FIRST","ROSTERSTATUS","FROM_YEAR",
+        "TO_YEAR","PLAYERCODE"]
+
+    """
+
+    # IsOnlyCurrentSeason: 0 is false 1 is true
     cur_season = 1
     if all_time:
         cur_season = 0
@@ -217,4 +268,4 @@ def get_all_players(season, all_time=False):
         "IsOnlyCurrentSeason": cur_season
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['CommonAllPlayers']
