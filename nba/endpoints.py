@@ -62,7 +62,20 @@ def get_team_game_log(team_id, season):
 
 
 def get_boxscore(game_id):
-    # TODO: document
+    """
+    return boxscore for a given game
+    args:
+        game_id (int)
+    returns:
+        players (list): players that played in given game and their stats
+
+        each player is a dict with the following available keys
+        ["GAME_ID","TEAM_ID","TEAM_ABBREVIATION","TEAM_CITY","PLAYER_ID",
+        "PLAYER_NAME","START_POSITION","COMMENT","MIN","FGM","FGA","FG_PCT",
+        "FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT","OREB","DREB","REB",
+        "AST","STL","BLK","TO","PF","PTS","PLUS_MINUS"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
     payload = {
         'GameID': game_id,
@@ -70,22 +83,36 @@ def get_boxscore(game_id):
         'EndPeriod': 10,
         'StartRange': 0,
         'EndRange': 28800,
-        'RangeType': 2
+        'RangeType': 0
     }
     response = utils.get_response(endpoint, payload)
     return response['PlayerStats']
 
 
 def get_player_info(player_id):
-    # TODO: document
-    # example james harden = 201935
+    """
+    return a players personal information
+    args:
+        player_id (int)
+    returns:
+        info (dict)
+
+        info is a dict with the following available keys
+        ["PERSON_ID","FIRST_NAME","LAST_NAME","DISPLAY_FIRST_LAST",
+        "DISPLAY_LAST_COMMA_FIRST","DISPLAY_FI_LAST","BIRTHDATE","SCHOOL",
+        "COUNTRY","LAST_AFFILIATION","HEIGHT","WEIGHT","SEASON_EXP","JERSEY",
+        "POSITION","ROSTERSTATUS","TEAM_ID","TEAM_NAME","TEAM_ABBREVIATION",
+        "TEAM_CODE","TEAM_CITY","PLAYERCODE","FROM_YEAR","TO_YEAR",
+        "DLEAGUE_FLAG"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/commonplayerinfo'
     payload = {
         "PlayerID": player_id,
         "LeagueID": "00"
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['CommonPlayerInfo']
 
 
 def get_player_games(player_id, season):
