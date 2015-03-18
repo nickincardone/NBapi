@@ -193,7 +193,21 @@ def get_team_roster(team_id, season):
 
 
 def get_player_shot_log(player_id):
-    # TODO: document
+    # TODO expand possible args
+    """
+    return shots player has taken
+    args:
+        player_id (int)
+    returns:
+        shots (list): shots a player has taken
+
+    each shot is a dict with the following available keys
+    ["GAME_ID","MATCHUP","LOCATION","W","FINAL_MARGIN","SHOT_NUMBER",
+    "PERIOD","GAME_CLOCK","SHOT_CLOCK","DRIBBLES","TOUCH_TIME","SHOT_DIST",
+    "PTS_TYPE","SHOT_RESULT","CLOSEST_DEFENDER",
+    "CLOSEST_DEFENDER_PLAYER_ID","CLOSE_DEF_DIST","FGM","PTS"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/playerdashptshotlog'
     payload = {
         "LeagueID": "00",
@@ -215,11 +229,25 @@ def get_player_shot_log(player_id):
         "LastNGames": 0
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['PtShotLog']
 
 
 def get_player_rebound_log(player_id):
-    # TODO: document
+    # TODO allow extra args
+    """
+    return rebounds player has grabbed
+    args:
+        player_id (int)
+    returns:
+        rebounds (list): rebounds a player has grabbed
+
+    each rebound is a dict with the following available keys
+    ["GAME_ID","MATCHUP","LOCATION","W","FINAL_MARGIN","REB_NUMBER",
+    "PERIOD","GAME_CLOCK","REB_TYPE","CONTESTED","NUM_CONTESTED",
+    "REB_DIST","SHOOTER","SHOOTER_PLAYER_ID","SHOT_TYPE","SHOT_DIST",
+    "OREB","DREB","REB"]
+
+    """
     endpoint = 'http://stats.nba.com/stats/playerdashptreboundlogs'
     payload = {
         "LeagueID": "00",
@@ -241,7 +269,7 @@ def get_player_rebound_log(player_id):
         "LastNGames": 0
     }
     response = utils.get_response(endpoint, payload)
-    return response
+    return response['PtRebLog']
 
 
 def get_all_players(season, all_time=False):
