@@ -6,6 +6,8 @@ league lineups
     http://stats.nba.com/stats/leaguedashlineups
 
 '''
+
+
 def get_schedule_from_date(date):
     """
     return games that happen on given date
@@ -14,12 +16,12 @@ def get_schedule_from_date(date):
     returns:
         games (list): games that happen that day
 
-        each game is a dict with the following available keys
-        ["GAME_DATE_EST","GAME_SEQUENCE","GAME_ID","GAME_STATUS_ID",
-        "GAME_STATUS_TEXT","GAMECODE","HOME_TEAM_ID","VISITOR_TEAM_ID",
-        "SEASON","LIVE_PERIOD","LIVE_PC_TIME",
-        "NATL_TV_BROADCASTER_ABBREVIATION","LIVE_PERIOD_TIME_BCAST",
-        "WH_STATUS"]
+    each game is a dict with the following available keys
+    ["GAME_DATE_EST","GAME_SEQUENCE","GAME_ID","GAME_STATUS_ID",
+    "GAME_STATUS_TEXT","GAMECODE","HOME_TEAM_ID","VISITOR_TEAM_ID",
+    "SEASON","LIVE_PERIOD","LIVE_PC_TIME",
+    "NATL_TV_BROADCASTER_ABBREVIATION","LIVE_PERIOD_TIME_BCAST",
+    "WH_STATUS"]
 
     """
     endpoint = 'http://stats.nba.com/stats/scoreboardv2'
@@ -41,11 +43,11 @@ def get_team_game_log(team_id, season):
     returns:
         games (list): games a team has played in given season
 
-        each game is a dict with the following available keys
-        ["TEAM_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
-        "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM",
-        "FTA","FT_PCT","OREB","DREB","REB","AST","STL","BLK",
-        "TOV","PF","PTS"]
+    each game is a dict with the following available keys
+    ["TEAM_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
+    "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM",
+    "FTA","FT_PCT","OREB","DREB","REB","AST","STL","BLK",
+    "TOV","PF","PTS"]
 
     """
     endpoint = 'http://stats.nba.com/stats/teamgamelog'
@@ -67,11 +69,11 @@ def get_boxscore(game_id):
     returns:
         players (list): players that played in given game and their stats
 
-        each player is a dict with the following available keys
-        ["GAME_ID","TEAM_ID","TEAM_ABBREVIATION","TEAM_CITY","PLAYER_ID",
-        "PLAYER_NAME","START_POSITION","COMMENT","MIN","FGM","FGA","FG_PCT",
-        "FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT","OREB","DREB","REB",
-        "AST","STL","BLK","TO","PF","PTS","PLUS_MINUS"]
+    each player is a dict with the following available keys
+    ["GAME_ID","TEAM_ID","TEAM_ABBREVIATION","TEAM_CITY","PLAYER_ID",
+    "PLAYER_NAME","START_POSITION","COMMENT","MIN","FGM","FGA","FG_PCT",
+    "FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT","OREB","DREB","REB",
+    "AST","STL","BLK","TO","PF","PTS","PLUS_MINUS"]
 
     """
     endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
@@ -95,13 +97,13 @@ def get_player_info(player_id):
     returns:
         info (dict)
 
-        info is a dict with the following available keys
-        ["PERSON_ID","FIRST_NAME","LAST_NAME","DISPLAY_FIRST_LAST",
-        "DISPLAY_LAST_COMMA_FIRST","DISPLAY_FI_LAST","BIRTHDATE","SCHOOL",
-        "COUNTRY","LAST_AFFILIATION","HEIGHT","WEIGHT","SEASON_EXP","JERSEY",
-        "POSITION","ROSTERSTATUS","TEAM_ID","TEAM_NAME","TEAM_ABBREVIATION",
-        "TEAM_CODE","TEAM_CITY","PLAYERCODE","FROM_YEAR","TO_YEAR",
-        "DLEAGUE_FLAG"]
+    info is a dict with the following available keys
+    ["PERSON_ID","FIRST_NAME","LAST_NAME","DISPLAY_FIRST_LAST",
+    "DISPLAY_LAST_COMMA_FIRST","DISPLAY_FI_LAST","BIRTHDATE","SCHOOL",
+    "COUNTRY","LAST_AFFILIATION","HEIGHT","WEIGHT","SEASON_EXP","JERSEY",
+    "POSITION","ROSTERSTATUS","TEAM_ID","TEAM_NAME","TEAM_ABBREVIATION",
+    "TEAM_CODE","TEAM_CITY","PLAYERCODE","FROM_YEAR","TO_YEAR",
+    "DLEAGUE_FLAG"]
 
     """
     endpoint = 'http://stats.nba.com/stats/commonplayerinfo'
@@ -122,11 +124,11 @@ def get_player_games(player_id, season):
     returns:
         games (list): games a player has played in given season
 
-        each game is a dict with the following available keys
-        ["SEASON_ID","PLAYER_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
-        "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT",
-        "OREB","DREB","REB","AST","STL","BLK","TOV","PF","PTS","PLUS_MINUS",
-        "VIDEO_AVAILABLE"]
+    each game is a dict with the following available keys
+    ["SEASON_ID","PLAYER_ID","GAME_ID","GAME_DATE","MATCHUP","WL","MIN",
+    "FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT",
+    "OREB","DREB","REB","AST","STL","BLK","TOV","PF","PTS","PLUS_MINUS",
+    "VIDEO_AVAILABLE"]
 
     """
     endpoint = 'http://stats.nba.com/stats/playergamelog'
@@ -149,10 +151,10 @@ def get_team_info(team_id, season):
     returns:
         info (dict)
 
-        info is a dict with the following available keys
-        ["TEAM_ID","SEASON_YEAR","TEAM_CITY","TEAM_NAME","TEAM_ABBREVIATION",
-        "TEAM_CONFERENCE","TEAM_DIVISION","TEAM_CODE","W","L","PCT",
-        "CONF_RANK","DIV_RANK","MIN_YEAR","MAX_YEAR"]
+    info is a dict with the following available keys
+    ["TEAM_ID","SEASON_YEAR","TEAM_CITY","TEAM_NAME","TEAM_ABBREVIATION",
+    "TEAM_CONFERENCE","TEAM_DIVISION","TEAM_CODE","W","L","PCT",
+    "CONF_RANK","DIV_RANK","MIN_YEAR","MAX_YEAR"]
 
     """
     endpoint = 'http://stats.nba.com/stats/teaminfocommon'
@@ -175,9 +177,9 @@ def get_team_roster(team_id, season):
     returns:
         players (list): players on roster
 
-        each player is a dict with the following available keys
-        ["TeamID","SEASON","LeagueID","PLAYER","NUM","POSITION","HEIGHT",
-        "WEIGHT","BIRTH_DATE","AGE","EXP","SCHOOL","PLAYER_ID"]
+    each player is a dict with the following available keys
+    ["TeamID","SEASON","LeagueID","PLAYER","NUM","POSITION","HEIGHT",
+    "WEIGHT","BIRTH_DATE","AGE","EXP","SCHOOL","PLAYER_ID"]
 
     """
     endpoint = 'http://stats.nba.com/stats/commonteamroster'
@@ -250,9 +252,9 @@ def get_all_players(season, all_time=False):
     returns:
         players (list)
 
-        each player is a dict with the following available keys
-        ["PERSON_ID","DISPLAY_LAST_COMMA_FIRST","ROSTERSTATUS","FROM_YEAR",
-        "TO_YEAR","PLAYERCODE"]
+    each player is a dict with the following available keys
+    ["PERSON_ID","DISPLAY_LAST_COMMA_FIRST","ROSTERSTATUS","FROM_YEAR",
+    "TO_YEAR","PLAYERCODE"]
 
     """
 
