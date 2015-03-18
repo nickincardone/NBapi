@@ -34,6 +34,60 @@ def get_schedule_from_date(date):
     return response['GameHeader']
 
 
+def get_standings(date):
+    """
+    return the standing on a given date
+    args:
+        date (string): format=mm/dd/yyyy
+    returns:
+        standings (dict) keys are 'EAST', and 'WEST'
+            values are teams
+
+    teams (list): games that happen that day
+
+    each team is a dict with the following available keys
+    ["TEAM_ID","LEAGUE_ID","SEASON_ID","STANDINGSDATE","CONFERENCE","TEAM",
+    "G","W","L","W_PCT","HOME_RECORD","ROAD_RECORD"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/scoreboardv2'
+    payload = {
+        'DayOffset': '0',
+        'LeagueID': '00',
+        'gameDate': date
+    }
+    response = utils.get_response(endpoint, payload)
+    return {
+        'EAST': response['EastConfStandingsByDay'],
+        'WEST': response['WestConfStandingsByDay']
+    }
+
+
+def get_daily_team_leaders(date):
+    """
+    return statistical leaders for teams that play on given date
+    args:
+        date (string): format=mm/dd/yyyy
+    returns:
+        teams (list): teams that played on the given date and their statistical
+            leaders
+
+    each team is a dict with the following available keys
+    ["GAME_ID","TEAM_ID","TEAM_CITY","TEAM_NICKNAME","TEAM_ABBREVIATION",
+    "PTS_PLAYER_ID","PTS_PLAYER_NAME","PTS","REB_PLAYER_ID","REB_PLAYER_NAME",
+    "REB","AST_PLAYER_ID","AST_PLAYER_NAME","AST"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/scoreboardv2'
+    payload = {
+        'DayOffset': '0',
+        'LeagueID': '00',
+        'gameDate': date
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['TeamLeaders']
+
+
 def get_team_game_log(team_id, season):
     """
     return games that a team has already played in given season
