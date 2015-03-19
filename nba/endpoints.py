@@ -2,8 +2,27 @@ import utils
 
 '''
 TODO unimplemented endpoints
-league lineups
-    http://stats.nba.com/stats/leaguedashlineups
+    http://stats.nba.com/stats/leaguedashplayerstats
+
+    http://stats.nba.com/js/data/sportvu/2014/drivesData.json
+    http://stats.nba.com/js/data/sportvu/2014/defenseData.json
+    http://stats.nba.com/js/data/sportvu/2014/catchShootData.json
+    http://stats.nba.com/js/data/sportvu/2014/speedData.json
+    http://stats.nba.com/js/data/sportvu/2014/shootingData.json
+    http://stats.nba.com/js/data/sportvu/2014/reboundingData.json
+    http://stats.nba.com/js/data/sportvu/2014/pullUpShootData.json
+    http://stats.nba.com/js/data/sportvu/2014/touchesData.json
+    http://stats.nba.com/js/data/sportvu/2014/passingData.json
+
+    http://stats.nba.com/js/data/sportvu/2014/drivesTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/defenseTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/catchShootTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/speedTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/shootingTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/reboundingTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/pullUpShootTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/touchesTeamData.json
+    http://stats.nba.com/js/data/sportvu/2014/passingTeamData.json
 
 '''
 
