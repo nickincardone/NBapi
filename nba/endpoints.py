@@ -215,6 +215,64 @@ def get_player_game_log(player_id, season):
     return response['PlayerGameLog']
 
 
+def get_league_leaders(season):
+    # TODO document
+    endpoint = 'http://stats.nba.com/stats/leagueleaders'
+    payload = {
+        "LeagueID": "00",
+        "PerMode": "PerGame",
+        "StatCategory": "PTS",
+        "Season": util.cleanse_season(season),
+        "SeasonType": "Regular Season",
+        "Scope": "S"
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['LeagueLeaders']
+
+
+def get_league_lineups(season):
+    """
+    return lineups that have played in given season
+    args:
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        lineups (list): lineups that have played in the season
+
+    each lineup is a dict with the following available keys
+    ["GROUP_SET","GROUP_ID","GROUP_NAME","TEAM_ID","TEAM_ABBREVIATION","GP",
+    "W","L","W_PCT","MIN","FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM",
+    "FTA","FT_PCT","OREB","DREB","REB","AST","TOV","STL","BLK","BLKA","PF",
+    "PFD","PTS","PLUS_MINUS"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/leaguedashlineups'
+    payload = {
+        "MeasureType": "Base",
+        "PerMode": "PerGame",
+        "PlusMinus": "N",
+        "PaceAdjust": "N",
+        "Rank": "N",
+        "LeagueID": "00",
+        "Season": util.cleanse_season(season),
+        "SeasonType": "Regular Season",
+        "Outcome": None,
+        "Location": None,
+        "Month": 0,
+        "SeasonSegment": None,
+        "DateFrom": None,
+        "DateTo": None,
+        "OpponentTeamID": 0,
+        "VsConference": None,
+        "VsDivision": None,
+        "GameSegment": None,
+        "Period": 0,
+        "LastNGames": 0,
+        "GroupQuantity": 5
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['Lineups']
+
+
 def get_team_info(team_id, season):
     """
     return a team's information
@@ -253,6 +311,30 @@ def get_team_roster(team_id, season):
     each player is a dict with the following available keys
     ["TeamID","SEASON","LeagueID","PLAYER","NUM","POSITION","HEIGHT",
     "WEIGHT","BIRTH_DATE","AGE","EXP","SCHOOL","PLAYER_ID"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/commonteamroster'
+    payload = {
+        "TeamID": team_id,
+        "LeagueID": "00",
+        "Season": utils.cleanse_season(season)
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['CommonTeamRoster']
+
+
+def get_team_coaching_staff(team_id, season):
+    """
+    return a given team's coaching staff
+    args:
+        team_id (int)
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        coaches (list): 
+
+    each coach is a dict with the following available keys
+    ["TEAM_ID","SEASON","COACH_ID","FIRST_NAME","LAST_NAME","COACH_NAME",
+    "COACH_CODE","IS_ASSISTANT","COACH_TYPE","SCHOOL","SORT_SEQUENCE"]
 
     """
     endpoint = 'http://stats.nba.com/stats/commonteamroster'
