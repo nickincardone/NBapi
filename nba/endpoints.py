@@ -7,6 +7,25 @@ league lineups
 
 '''
 
+'''
+available methods
+    get_schedule_from_date
+    get_standings_from_date
+    get_team_leaders_from_date
+    get_team_game_log
+    get_boxscore
+    get_player_info
+    get_player_game_log
+    get_league_leaders
+    get_league_lineups
+    get_team_info
+    get_team_roster
+    get_team_coaching_staff
+    get_player_shot_log
+    get_player_rebound_log
+    get_all_players
+'''
+
 
 def get_schedule_from_date(date):
     """
@@ -34,7 +53,7 @@ def get_schedule_from_date(date):
     return response['GameHeader']
 
 
-def get_standings(date):
+def get_standings_from_date(date):
     """
     return the standing on a given date
     args:
@@ -63,7 +82,7 @@ def get_standings(date):
     }
 
 
-def get_daily_team_leaders(date):
+def get_team_leaders_from_date(date):
     """
     return statistical leaders for teams that play on given date
     args:
@@ -169,7 +188,7 @@ def get_player_info(player_id):
     return response['CommonPlayerInfo']
 
 
-def get_player_games(player_id, season):
+def get_player_game_log(player_id, season):
     """
     return games that a player has already played in given season
     args:
@@ -328,9 +347,9 @@ def get_player_rebound_log(player_id):
 
 def get_all_players(season, all_time=False):
     """
-    return boxscore for a given game
+    return all players
     args:
-        game_id (int)
+        season: format ex: '1999-00', also accepts 1999 or 99
     returns:
         players (list)
 
