@@ -24,8 +24,6 @@ available methods
     player_touches_data
     player_passing_data
 
-
-
 '''
 
 # TODO verify all these, coded on a plane
