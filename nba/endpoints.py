@@ -1,38 +1,17 @@
 import utils
 
 '''
-TODO unimplemented endpoints
-    http://stats.nba.com/stats/leaguedashplayerstats
-
-    http://stats.nba.com/js/data/sportvu/2014/drivesData.json
-    http://stats.nba.com/js/data/sportvu/2014/defenseData.json
-    http://stats.nba.com/js/data/sportvu/2014/catchShootData.json
-    http://stats.nba.com/js/data/sportvu/2014/speedData.json
-    http://stats.nba.com/js/data/sportvu/2014/shootingData.json
-    http://stats.nba.com/js/data/sportvu/2014/reboundingData.json
-    http://stats.nba.com/js/data/sportvu/2014/pullUpShootData.json
-    http://stats.nba.com/js/data/sportvu/2014/touchesData.json
-    http://stats.nba.com/js/data/sportvu/2014/passingData.json
-
-    http://stats.nba.com/js/data/sportvu/2014/drivesTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/defenseTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/catchShootTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/speedTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/shootingTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/reboundingTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/pullUpShootTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/touchesTeamData.json
-    http://stats.nba.com/js/data/sportvu/2014/passingTeamData.json
-
-'''
-
-'''
 available methods
     get_schedule_from_date
     get_standings_from_date
     get_team_leaders_from_date
     get_team_game_log
+    get_play_by_play
     get_boxscore
+    get_player_tracking_from_game
+    get_all_players_stats
+    get_all_teams_stats
+    get_player_game_shot_chart
     get_player_info
     get_player_game_log
     get_league_leaders
@@ -153,6 +132,39 @@ def get_team_game_log(team_id, season):
     return response['TeamGameLog']
 
 
+def get_play_by_play(game_id):
+    """
+    return play by play data for a given game
+    args:
+        game_id (int)
+    returns:
+        plays (list)
+
+    each player is a dict with the following available keys
+    ["GAME_ID","EVENTNUM","EVENTMSGTYPE","EVENTMSGACTIONTYPE","PERIOD",
+    "WCTIMESTRING","PCTIMESTRING","HOMEDESCRIPTION","NEUTRALDESCRIPTION",
+    "VISITORDESCRIPTION","SCORE","SCOREMARGIN","PERSON1TYPE","PLAYER1_ID",
+    "PLAYER1_NAME","PLAYER1_TEAM_ID","PLAYER1_TEAM_CITY",
+    "PLAYER1_TEAM_NICKNAME","PLAYER1_TEAM_ABBREVIATION","PERSON2TYPE",
+    "PLAYER2_ID","PLAYER2_NAME","PLAYER2_TEAM_ID","PLAYER2_TEAM_CITY",
+    "PLAYER2_TEAM_NICKNAME","PLAYER2_TEAM_ABBREVIATION","PERSON3TYPE",
+    "PLAYER3_ID","PLAYER3_NAME","PLAYER3_TEAM_ID","PLAYER3_TEAM_CITY",
+    "PLAYER3_TEAM_NICKNAME","PLAYER3_TEAM_ABBREVIATION"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/playbyplayv2'
+    payload = {
+        'GameID': game_id,
+        'StartPeriod': 1,
+        'EndPeriod': 10,
+        'StartRange': 0,
+        'EndRange': 28800,
+        'RangeType': 0
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['PlayerStats']
+
+
 def get_boxscore(game_id):
     """
     return boxscore for a given game
@@ -170,15 +182,188 @@ def get_boxscore(game_id):
     """
     endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
     payload = {
+        "GameID": game_id
+        "StartPeriod": 1,
+        "EndPeriod": 10
+        }
+    response = utils.get_response(endpoint, payload)
+    return response['PlayByPlay']
+
+
+def get_player_tracking_from_game(game_id):
+    """
+    return player tracking information for a given game
+    args:
+        game_id (int)
+    returns:
+        players (list): players that played in given game and their 
+            tracking information
+
+    each player is a dict with the following available keys
+    ["GAME_ID","TEAM_ID","TEAM_ABBREVIATION","TEAM_CITY","PLAYER_ID",
+    "PLAYER_NAME","START_POSITION","COMMENT","MIN","SPD","DIST","ORBC",
+    "DRBC","RBC","TCHS","SAST","FTAST","PASS","AST","CFGM","CFGA",
+    "CFG_PCT","UFGM","UFGA","UFG_PCT","FG_PCT","DFGM","DFGA","DFG_PCT"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/boxscoreplayertrackv2'
+    payload = {
         'GameID': game_id,
-        'StartPeriod': 1,
-        'EndPeriod': 10,
-        'StartRange': 0,
-        'EndRange': 28800,
-        'RangeType': 0
     }
     response = utils.get_response(endpoint, payload)
-    return response['PlayerStats']
+    return response['PlayerTrack']
+
+
+def get_all_players_stats(season):
+    # TODO all users to specify what type of stats
+    """
+    return basic stats for all players in a season
+    args:
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        players (list): players and their stats for the season
+
+    each player is a dict with the following available keys
+    ["PLAYER_ID","PLAYER_NAME","TEAM_ID","TEAM_ABBREVIATION","GP","W","L",
+    "W_PCT","MIN","FGM","FGA","FG_PCT","FG3M","FG3A","FG3_PCT","FTM","FTA",
+    "FT_PCT","OREB","DREB","REB","AST","TOV","STL","BLK","BLKA","PF","PFD",
+    "PTS","PLUS_MINUS","DD2","TD3","CFID","CFPARAMS"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/leaguedashplayerstats'
+    payload = {
+        "MeasureType":"Base",
+        "PerMode":"PerGame",
+        "PlusMinus":"N",
+        "PaceAdjust":"N",
+        "Rank":"N",
+        "LeagueID":"00",
+        "Season":utils.cleanse_season(season),
+        "SeasonType":"Regular Season",
+        "Outcome": None,
+        "Location": None,
+        "Month":0,
+        "SeasonSegment": None,
+        "DateFrom": None,
+        "DateTo": None,
+        "OpponentTeamID":0,
+        "VsConference": None,
+        "VsDivision": None,
+        "GameSegment": None,
+        "Period":0,
+        "LastNGames":0,
+        "GameScope": None,
+        "PlayerExperience": None,
+        "PlayerPosition": None,
+        "StarterBench": None
+    }
+    response = utils.get_response(endpoint, payload)
+    # TODO get corrent name
+    return response['LeagueDashPlayerStats']
+
+
+def get_all_teams_stats(season): 
+    # TODO all users to specify what type of stats
+    """
+    return basic stats for all teams in a season
+    args:
+        season: format ex: '1999-00', also accepts 1999 or 99
+    returns:
+        teams (list): teams and their stats for the season
+
+    each team is a dict with the following available keys
+    ["TEAM_ID","TEAM_NAME","GP","W","L","W_PCT","MIN","FGM","FGA","FG_PCT",
+    "FG3M","FG3A","FG3_PCT","FTM","FTA","FT_PCT","OREB","DREB","REB","AST",
+    "TOV","STL","BLK","BLKA","PF","PFD","PTS","PLUS_MINUS","CFID","CFPARAMS"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/leaguedashteamstats'
+    payload = {
+        "MeasureType":"Base",
+        "PerMode":"PerGame",
+        "PlusMinus":"N",
+        "PaceAdjust":"N",
+        "Rank":"N",
+        "LeagueID":"00",
+        "Season":utils.cleanse_season(season),
+        "SeasonType":"Regular Season",
+        "Outcome": None,
+        "Location": None,
+        "Month":0,
+        "SeasonSegment": None,
+        "DateFrom": None,
+        "DateTo": None,
+        "OpponentTeamID":0,
+        "VsConference": None,
+        "VsDivision": None,
+        "GameSegment": None,
+        "Period":0,
+        "LastNGames":0,
+        "GameScope": None,
+        "PlayerExperience": None,
+        "PlayerPosition": None,
+        "StarterBench": None
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['LeagueDashTeamStats']
+
+
+def get_player_game_shot_chart(game_id, team_id, player_id):
+    # TODO check to make sure correct 
+    """
+    return player tracking information for a given game
+    args:
+        game_id (int)
+        #TODO get team_id from player_id
+        team_id (int)
+        player_id (int)
+    returns:
+        shots (list): shots a player attempted during a game
+
+    each player is a dict with the following available keys
+    ["GRID_TYPE","GAME_ID","GAME_EVENT_ID","PLAYER_ID","PLAYER_NAME","TEAM_ID",
+    "TEAM_NAME","PERIOD","MINUTES_REMAINING","SECONDS_REMAINING","EVENT_TYPE",
+    "ACTION_TYPE","SHOT_TYPE","SHOT_ZONE_BASIC","SHOT_ZONE_AREA",
+    "SHOT_ZONE_RANGE","SHOT_DISTANCE","LOC_X","LOC_Y","SHOT_ATTEMPTED_FLAG",
+    "SHOT_MADE_FLAG"]
+
+    """
+    endpoint = 'http://stats.nba.com/stats/shotchartdetail'
+    payload = {
+        "LeagueID": "00",
+        #see if need season or can get from game_id
+        "Season": "2014-15",
+        "SeasonType": "Regular Season",
+        "TeamID": team_id,
+        "PlayerID": player_id,
+        "GameID": game_id,
+        "Outcome": None,
+        "Location": None,
+        "Month": 0,
+        "SeasonSegment": None,
+        "DateFrom": None,
+        "DateTo": None,
+        "OpponentTeamID": 0,
+        "VsConference": None,
+        "VsDivision": None,
+        "Position": None,
+        "RookieYear": None,
+        "GameSegment": None,
+        "Period": 0,
+        "LastNGames": 0,
+        "ClutchTime": None,
+        "AheadBehind": None,
+        "PointDiff": None,
+        "RangeType": 2,
+        "StartPeriod": 1,
+        "EndPeriod": 10,
+        "StartRange": 0,
+        "EndRange": 28800,
+        "ContextFilter": "",
+        "ContextMeasure": "FGA"
+    }
+    response = utils.get_response(endpoint, payload)
+    return response['Shot_Chart_Detail']
 
 
 def get_player_info(player_id):

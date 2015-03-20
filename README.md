@@ -2,6 +2,8 @@
 python wrapper for the undocumented/unofficial NBA stats api
 
 `endpoints.py` contains methods to call the api along with documentation
+## Use
+The NBA stats api is unofficial and undocumented so these endpoints may break or return unexpected data at any time. Please rate limit all requests. Please be smart when using this wrapper, do not try to copy every stat the NBA has ever collected.
 
 ## implemented endpoints
 
