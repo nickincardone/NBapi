@@ -1,4 +1,4 @@
-import utils
+from nba import utils
 
 '''
 available methods
