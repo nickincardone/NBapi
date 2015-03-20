@@ -176,3 +176,9 @@ def get_response(endpoint, payload):
         set_name = result_set['name']
         result[set_name] = set_to_dict(result_set)
     return result
+
+def season_to_int(season):
+    if formatted_season = cleanse_season(season):
+        return int(formatted_season.split('-')[0])
+    else:
+        return None
