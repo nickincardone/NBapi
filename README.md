@@ -46,6 +46,17 @@ http://stats.nba.com/js/data/sportvu/{season}/reboundingData.json
 http://stats.nba.com/js/data/sportvu/{season}/pullUpShootData.json
 http://stats.nba.com/js/data/sportvu/{season}/touchesData.json
 http://stats.nba.com/js/data/sportvu/{season}/passingData.json
+
+#synergy player endpoints
+http://stats.nba.com/js/data/playtype/player_Transition.js
+http://stats.nba.com/js/data/playtype/player_Cut.js
+http://stats.nba.com/js/data/playtype/player_PRBallHandler.js
+http://stats.nba.com/js/data/playtype/player_Handoff.js
+http://stats.nba.com/js/data/playtype/player_Isolation.js
+http://stats.nba.com/js/data/playtype/player_Misc.js
+http://stats.nba.com/js/data/playtype/player_Postup.js
+http://stats.nba.com/js/data/playtype/player_PRRollMan.js
+http://stats.nba.com/js/data/playtype/player_Spotup.js
 ```
 
 ## Contributing
@@ -62,17 +73,8 @@ http://stats.nba.com/stats/leaguedashteamshotlocations
 http://stats.nba.com/stats/playervsplayer
 http://stats.nba.com/stats/teamvsplayer
 
-http://stats.nba.com/js/data/playtype/player_Transition.js
-http://stats.nba.com/js/data/playtype/player_Cut.js
-http://stats.nba.com/js/data/playtype/player_PRBallHandler.js
-http://stats.nba.com/js/data/playtype/player_Handoff.js
-http://stats.nba.com/js/data/playtype/player_Isolation.js
-http://stats.nba.com/js/data/playtype/player_Misc.js
 http://stats.nba.com/js/data/playtype/Screen.js
-http://stats.nba.com/js/data/playtype/player_Postup.js
 http://stats.nba.com/js/data/playtype/Rebound.js
-http://stats.nba.com/js/data/playtype/player_PRRollMan.js
-http://stats.nba.com/js/data/playtype/player_Spotup.js)
 
 http://stats.nba.com/js/data/playtype/team_Transition.js
 http://stats.nba.com/js/data/playtype/team_Cut.js
