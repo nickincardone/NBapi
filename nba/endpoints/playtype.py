@@ -1,6 +1,8 @@
 from nba import utils
 
 '''
+TODO make sure defensive endpoints docs are right
+
 available methods
     player_transition_data
     player_cut_data
@@ -28,7 +30,7 @@ TODO
 
 '''
 
-def player_transition_data():
+def player_transition_off_data():
     """
     returns synergy transition data for all players this season
     returns:
@@ -46,7 +48,7 @@ def player_transition_data():
     return response['Offensive']
 
 
-def player_cut_data():
+def player_cut_off_data():
     """
     returns synergy cut data for all players this season
     returns:
@@ -64,7 +66,7 @@ def player_cut_data():
     return response['Offensive']
 
 
-def player_handoff_data():
+def player_handoff_off_data():
     """
     returns synergy handler data for all players this season
     returns:
@@ -83,7 +85,7 @@ def player_handoff_data():
     return response['Offensive']
 
 
-def player_pnr_handler_data():
+def player_pnr_handler_off_data():
     """
     returns synergy PnR ball handler data for all players this season
     returns:
@@ -101,7 +103,7 @@ def player_pnr_handler_data():
     return response['Offensive']
 
 
-def player_isolation_data():
+def player_isolation_off_data():
     """
     returns synergy isolation data for all players this season
     returns:
@@ -120,7 +122,7 @@ def player_isolation_data():
     return response['Offensive']
 
 
-def player_misc_data():
+def player_misc_off_data():
     """
     returns synergy misc data for all players this season
     returns:
@@ -139,7 +141,7 @@ def player_misc_data():
     return response['Offensive']
 
 
-def player_postup_data():
+def player_postup_off_data():
     """
     returns synergy postup data for all players this season
     returns:
@@ -157,7 +159,7 @@ def player_postup_data():
     return response['Offensive']
 
 
-def player_pnr_roll_data():
+def player_pnr_roll_off_data():
     """
     returns synergy PnR roll data for all players this season
     returns:
@@ -174,7 +176,8 @@ def player_pnr_roll_data():
     response = utils.get_response(endpoint, None)
     return response['Offensive']
 
-def player_spotup_data():
+
+def player_spotup_off_data():
     """
     returns synergy spotup data for all players this season
     returns:
@@ -191,3 +194,171 @@ def player_spotup_data():
     endpoint = 'http://stats.nba.com/js/data/playtype/player_Spotup.js'
     response = utils.get_response(endpoint, None)
     return response['Offensive']
+
+
+def player_transition_def_data():
+    """
+    returns synergy transition data for all players this season
+    returns:
+        players (list): transition data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss",
+    "Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PossG","PPG",
+    "FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne","Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Transition.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_cut_def_data():
+    """
+    returns synergy cut data for all players this season
+    returns:
+        players (list): cut data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss",
+    "Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PossG","PPG",
+    "FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne","Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Cut.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_handoff_def_data():
+    """
+    returns synergy handler data for all players this season
+    returns:
+        players (list): handler data for all players
+
+    each player is a dict with the following available keys
+    ["GP","Poss","Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP",
+    "PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","PossG",
+    "PPG","FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne",
+    "Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Handoff.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_pnr_handler_def_data():
+    """
+    returns synergy PnR ball handler data for all players this season
+    returns:
+        players (list): data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss",
+    "Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PossG","PPG",
+    "FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne","Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_PRBallHandler.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_isolation_def_data():
+    """
+    returns synergy isolation data for all players this season
+    returns:
+        players (list): isolation data for all players
+
+    each player is a dict with the following available keys
+    ["GP","Poss","Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP",
+    "PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","PossG",
+    "PPG","FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne",
+    "Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Isolation.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_misc_def_data():
+    """
+    returns synergy misc data for all players this season
+    returns:
+        players (list): misc data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerFirstName","PlayerLastName","PlayerNumber","P","TeamIDSID",
+    "TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss","Time",
+    "Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PlayerIDSID","PossG",
+    "PPG","FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne",
+    "Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Misc.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_postup_def_data():
+    """
+    returns synergy postup data for all players this season
+    returns:
+        players (list): postup data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss",
+    "Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PossG","PPG",
+    "FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne","Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Postup.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_pnr_roll_def_data():
+    """
+    returns synergy PnR roll data for all players this season
+    returns:
+        players (list): PnR roll data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerIDSID","PlayerFirstName","PlayerLastName","PlayerNumber","P",
+    "TeamIDSID","TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss",
+    "Time","Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PossG","PPG",
+    "FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne","Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_PRRollMan.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+
+def player_spotup_def_data():
+    """
+    returns synergy spotup data for all players this season
+    returns:
+        players (list): spotup data for all players
+
+    each player is a dict with the following available keys
+    ["PlayerFirstName","PlayerLastName","PlayerNumber","P","TeamIDSID",
+    "TeamName","TeamNameAbbreviation","TeamShortName","GP","Poss","Time",
+    "Points","FGA","FGM","PPP","WorsePPP","BetterPPP","PlayerIDSID","PossG",
+    "PPG","FGAG","FGMG","FGmG","FGm","FG","aFG","FT","TO","SF","PlusOne",
+    "Score"]
+
+    """
+    endpoint = 'http://stats.nba.com/js/data/playtype/player_Spotup.js'
+    response = utils.get_response(endpoint, None)
+    return response['Defensive']
+
+    
