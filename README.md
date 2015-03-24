@@ -75,16 +75,4 @@ http://stats.nba.com/stats/teamvsplayer
 
 http://stats.nba.com/js/data/playtype/Screen.js
 http://stats.nba.com/js/data/playtype/Rebound.js
-
-http://stats.nba.com/js/data/playtype/team_Transition.js
-http://stats.nba.com/js/data/playtype/team_Cut.js
-http://stats.nba.com/js/data/playtype/team_PRBallHandler.js
-http://stats.nba.com/js/data/playtype/team_Handoff.js
-http://stats.nba.com/js/data/playtype/team_Isolation.js
-http://stats.nba.com/js/data/playtype/team_Misc.js
-http://stats.nba.com/js/data/playtype/Screen.js
-http://stats.nba.com/js/data/playtype/team_Postup.js
-http://stats.nba.com/js/data/playtype/Rebound.js
-http://stats.nba.com/js/data/playtype/team_PRRollMan.js
-http://stats.nba.com/js/data/playtype/team_Spotup.js)
 ```
