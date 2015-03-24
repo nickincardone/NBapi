@@ -2,30 +2,30 @@ from nba import utils
 
 '''
 available methods
-    get_schedule_from_date
-    get_standings_from_date
-    get_team_leaders_from_date
-    get_team_game_log
-    get_play_by_play
-    get_boxscore
-    get_player_tracking_from_game
-    get_all_players_stats
-    get_all_teams_stats
-    get_player_game_shot_chart
-    get_player_info
-    get_player_game_log
-    get_league_leaders
-    get_league_lineups
-    get_team_info
-    get_team_roster
-    get_team_coaching_staff
-    get_player_shot_log
-    get_player_rebound_log
-    get_all_players
+    schedule_from_date
+    standings_from_date
+    team_leaders_from_date
+    team_game_log
+    play_by_play
+    boxscore
+    player_tracking_from_game
+    all_players_stats
+    all_teams_stats
+    player_game_shot_chart
+    player_info
+    player_game_log
+    league_leaders
+    league_lineups
+    team_info
+    team_roster
+    team_coaching_staff
+    player_shot_log
+    player_rebound_log
+    all_players
 '''
 
 
-def get_schedule_from_date(date):
+def schedule_from_date(date):
     """
     return games that happen on given date
     args:
@@ -51,7 +51,7 @@ def get_schedule_from_date(date):
     return response['GameHeader']
 
 
-def get_standings_from_date(date):
+def standings_from_date(date):
     """
     return the standing on a given date
     args:
@@ -80,7 +80,7 @@ def get_standings_from_date(date):
     }
 
 
-def get_team_leaders_from_date(date):
+def team_leaders_from_date(date):
     """
     return statistical leaders for teams that play on given date
     args:
@@ -105,7 +105,7 @@ def get_team_leaders_from_date(date):
     return response['TeamLeaders']
 
 
-def get_team_game_log(team_id, season):
+def team_game_log(team_id, season):
     """
     return games that a team has already played in given season
     args:
@@ -132,7 +132,7 @@ def get_team_game_log(team_id, season):
     return response['TeamGameLog']
 
 
-def get_play_by_play(game_id):
+def play_by_play(game_id):
     """
     return play by play data for a given game
     args:
@@ -165,7 +165,7 @@ def get_play_by_play(game_id):
     return response['PlayerStats']
 
 
-def get_boxscore(game_id):
+def boxscore(game_id):
     """
     return boxscore for a given game
     args:
@@ -190,7 +190,7 @@ def get_boxscore(game_id):
     return response['PlayByPlay']
 
 
-def get_player_tracking_from_game(game_id):
+def player_tracking_from_game(game_id):
     """
     return player tracking information for a given game
     args:
@@ -214,7 +214,7 @@ def get_player_tracking_from_game(game_id):
     return response['PlayerTrack']
 
 
-def get_all_players_stats(season):
+def all_players_stats(season):
     # TODO all users to specify what type of stats
     """
     return basic stats for all players in a season
@@ -262,7 +262,7 @@ def get_all_players_stats(season):
     return response['LeagueDashPlayerStats']
 
 
-def get_all_teams_stats(season): 
+def all_teams_stats(season): 
     # TODO all users to specify what type of stats
     """
     return basic stats for all teams in a season
@@ -308,7 +308,7 @@ def get_all_teams_stats(season):
     return response['LeagueDashTeamStats']
 
 
-def get_player_game_shot_chart(game_id, team_id, player_id):
+def player_game_shot_chart(game_id, team_id, player_id):
     # TODO check to make sure correct 
     """
     return player tracking information for a given game
@@ -366,7 +366,7 @@ def get_player_game_shot_chart(game_id, team_id, player_id):
     return response['Shot_Chart_Detail']
 
 
-def get_player_info(player_id):
+def player_info(player_id):
     """
     return a players information
     args:
@@ -392,7 +392,7 @@ def get_player_info(player_id):
     return response['CommonPlayerInfo']
 
 
-def get_player_game_log(player_id, season):
+def player_game_log(player_id, season):
     """
     return games that a player has already played in given season
     args:
@@ -419,7 +419,7 @@ def get_player_game_log(player_id, season):
     return response['PlayerGameLog']
 
 
-def get_league_leaders(season):
+def league_leaders(season):
     # TODO document
     endpoint = 'http://stats.nba.com/stats/leagueleaders'
     payload = {
@@ -434,7 +434,7 @@ def get_league_leaders(season):
     return response['LeagueLeaders']
 
 
-def get_league_lineups(season):
+def league_lineups(season):
     """
     return lineups that have played in given season
     args:
@@ -477,7 +477,7 @@ def get_league_lineups(season):
     return response['Lineups']
 
 
-def get_team_info(team_id, season):
+def team_info(team_id, season):
     """
     return a team's information
     args:
@@ -503,7 +503,7 @@ def get_team_info(team_id, season):
     return response['TeamInfoCommon']
 
 
-def get_team_roster(team_id, season):
+def team_roster(team_id, season):
     """
     return players on a team (only current players if this season)
     args:
@@ -527,7 +527,7 @@ def get_team_roster(team_id, season):
     return response['CommonTeamRoster']
 
 
-def get_team_coaching_staff(team_id, season):
+def team_coaching_staff(team_id, season):
     """
     return a given team's coaching staff
     args:
@@ -551,7 +551,7 @@ def get_team_coaching_staff(team_id, season):
     return response['CommonTeamRoster']
 
 
-def get_player_shot_log(player_id):
+def player_shot_log(player_id):
     # TODO expand possible args
     """
     return shots player has taken
@@ -591,7 +591,7 @@ def get_player_shot_log(player_id):
     return response['PtShotLog']
 
 
-def get_player_rebound_log(player_id):
+def player_rebound_log(player_id):
     # TODO allow extra args
     """
     return rebounds player has grabbed
@@ -631,7 +631,7 @@ def get_player_rebound_log(player_id):
     return response['PtRebLog']
 
 
-def get_all_players(season, all_time=False):
+def all_players(season, all_time=False):
     """
     return all players
     args:

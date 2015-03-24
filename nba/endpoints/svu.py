@@ -2,33 +2,21 @@ from nba import utils
 
 '''
 available methods
-    team_drive_data
-    team_defense_data
-    team_catch_shoot_data
-    team_catch_shoot_data
-    team_speed_data
-    team_shooting_data
-    team_rebounding_data
-    team_pull_up_data
-    team_touches_data
-    team_passing_data
-
-    player_drive_data
-    player_defense_data
-    player_catch_shoot_data
-    player_catch_shoot_data
-    player_speed_data
-    player_shooting_data
-    player_rebounding_data
-    player_pull_up_data
-    player_touches_data
-    player_passing_data
-
+    {team/player}_drive
+    {team/player}_defense
+    {team/player}_catch_shoot
+    {team/player}_catch_shoot
+    {team/player}_speed
+    {team/player}_shooting
+    {team/player}_rebounding
+    {team/player}_pull_up
+    {team/player}_touches
+    {team/player}_passing
 '''
 
 # TODO verify all these, coded on a plane
 
-def team_drive_data(season):
+def team_drive(season):
     """
     returns sportsvu driving data for all teams
     args:
@@ -46,7 +34,7 @@ def team_drive_data(season):
     return response['TeamTrackingDrivesStats']
 
 
-def team_defense_data(season):
+def team_defense(season):
     """
     returns sportsvu defense data for all teams
     args:
@@ -65,7 +53,7 @@ def team_defense_data(season):
     return response['TeamTrackingDefenseStats']
 
 
-def team_catch_shoot_data(season):
+def team_catch_shoot(season):
     """
     returns sportsvu catch and shoot data for all teams
     args:
@@ -84,7 +72,7 @@ def team_catch_shoot_data(season):
     return response['TeamTrackingCatchShootStats']
 
 
-def team_speed_data(season):
+def team_speed(season):
     """
     returns sportsvu speed data for all teams
     args:
@@ -103,7 +91,7 @@ def team_speed_data(season):
     return response['TeamTrackingSpeedStats']
 
 
-def team_shooting_data(season):
+def team_shooting(season):
     """
     returns sportsvu shooting data for all teams
     args:
@@ -125,7 +113,7 @@ def team_shooting_data(season):
     return response['TeamTrackingShootingEfficiencyStats']
 
 
-def team_rebounding_data(season):
+def team_rebounding(season):
     """
     returns sportsvu rebounding data for all teams
     args:
@@ -147,7 +135,7 @@ def team_rebounding_data(season):
     return response['TeamTrackingReboundingStats']
 
 
-def team_pull_up_data(season):
+def team_pull_up(season):
     """
     returns sportsvu pull up shooting data for all teams
     args:
@@ -166,7 +154,7 @@ def team_pull_up_data(season):
     return response['TeamTrackingPullUpShootStats']
 
 
-def team_touches_data(season):
+def team_touches(season):
     """
     returns sportsvu touches data for all teams
     args:
@@ -185,7 +173,7 @@ def team_touches_data(season):
     return response['TeamTrackingTouchesStats']
 
 
-def team_passing_data(season):
+def team_passing(season):
     """
     returns sportsvu passing data for all teams
     args:
@@ -204,7 +192,7 @@ def team_passing_data(season):
     return response['TeamTrackingPassingStats']
 
 
-def player_drive_data(season):
+def player_drive(season):
     """
     returns sportsvu driving data for all players
     args:
@@ -222,7 +210,7 @@ def player_drive_data(season):
     return response['PlayerTrackingDrivesStats']
 
 
-def player_defense_data(season):
+def player_defense(season):
     """
     returns sportsvu defense data for all players
     args:
@@ -241,7 +229,7 @@ def player_defense_data(season):
     return response['PlayerTrackingDefenseStats']
 
 
-def player_catch_shoot_data(season):
+def player_catch_shoot(season):
     """
     returns sportsvu catch and shoot data for all players
     args:
@@ -260,7 +248,7 @@ def player_catch_shoot_data(season):
     return response['PlayerTrackingCatchShootStats']
 
 
-def player_speed_data(season):
+def player_speed(season):
     """
     returns sportsvu speed data for all players
     args:
@@ -279,7 +267,7 @@ def player_speed_data(season):
     return response['PlayerTrackingSpeedStats']
 
 
-def player_shooting_data(season):
+def player_shooting(season):
     """
     returns sportsvu shooting data for all players
     args:
@@ -301,7 +289,7 @@ def player_shooting_data(season):
     return response['PlayerTrackingShootingEfficiencyStats']
 
 
-def player_rebounding_data(season):
+def player_rebounding(season):
     """
     returns sportsvu rebounding data for all players
     args:
@@ -323,7 +311,7 @@ def player_rebounding_data(season):
     return response['PlayerTrackingReboundingStats']
 
 
-def player_pull_up_data(season):
+def player_pull_up(season):
     """
     returns sportsvu pull up shooting data for all players
     args:
@@ -342,7 +330,7 @@ def player_pull_up_data(season):
     return response['PlayerTrackingPullUpShootStats']
 
 
-def player_touches_data(season):
+def player_touches(season):
     """
     returns sportsvu touches data for all players
     args:
@@ -361,7 +349,7 @@ def player_touches_data(season):
     return response['PlayerTrackingTouchesStats']
 
 
-def player_passing_data(season):
+def player_passing(season):
     """
     returns sportsvu passing data for all players
     args:

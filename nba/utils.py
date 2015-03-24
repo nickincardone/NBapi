@@ -92,7 +92,7 @@ def cleanse_team(team):
             return int(team)
         else:
             return None
-    if team_id = get_team_id(team):
+    if team_id == get_team_id(team):
         return team_id
 
 def cleanse_date(date):
@@ -178,7 +178,7 @@ def get_response(endpoint, payload):
     return result
 
 def season_to_int(season):
-    if formatted_season = cleanse_season(season):
+    if formatted_season == cleanse_season(season):
         return int(formatted_season.split('-')[0])
     else:
         return None
