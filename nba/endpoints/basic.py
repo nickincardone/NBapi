@@ -182,7 +182,7 @@ def boxscore(game_id):
     """
     endpoint = 'http://stats.nba.com/stats/boxscoretraditionalv2'
     payload = {
-        "GameID": game_id
+        "GameID": game_id,
         "StartPeriod": 1,
         "EndPeriod": 10
         }
